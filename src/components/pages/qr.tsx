@@ -39,19 +39,32 @@ export function QRGen() {
       <h2 className="text-active text-2xl">
         Generate QR Codes for sharing your content. Completely free.
       </h2>
-      <input
-        type="text"
-        placeholder="Enter a link, number or any text to generate the QR Code..."
-        className="text-sm w-1/2 p-4 rounded-md shadow-md border border-gray-100 placeholder:text-gray-300"
-        onChange={e => setInput(e.target.value)}
-        onKeyDown={e => {
-          if (e.key === 'Enter') {
-            setQr(input)
-          }
-        }}
-      ></input>
+      <div className="flex flex-row items-center justify-center gap-x-4 w-full">
+        <input
+          type="text"
+          placeholder="Enter a link, number or any text to generate the QR Code..."
+          className="text-sm w-1/2 p-4 rounded-md shadow-md border border-gray-100 placeholder:text-gray-300"
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              setQr(input)
+            }
+          }}
+        />
+
+        <button
+          className="text-sm bg-gray-200 hover:bg-gray-300 transition-colors duration-300 px-4 py-2 rounded-full font-semibold"
+          onClick={() => {
+            setInput('')
+            setQr('')
+          }}
+        >
+          Clear
+        </button>
+      </div>
       <button
-        className="py-3 px-6 bg-blue-500 hover:bg-blue-600 transition-colors duration-300 rounded-md text-white font-bold"
+        className="py-2.5 px-5 bg-blue-500 hover:bg-blue-600 transition-colors duration-300 rounded-md text-white font-bold"
         onClick={() => {
           setQr(input)
         }}
