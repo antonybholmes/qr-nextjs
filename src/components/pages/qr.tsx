@@ -1,4 +1,6 @@
 'use client'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { cn } from '@lib/class-names'
 import QRCode from 'qrcode'
 import { useEffect, useRef, useState } from 'react'
@@ -34,16 +36,18 @@ export function QRGen() {
   }
 
   return (
-    <div className="flex flex-col gap-y-5 py-5 relative bg-gray font-mono items-center min-h-screen">
-      <h1 className="text-5xl font-bold">QR Code Generator</h1>
-      <h2 className="text-active text-2xl">
-        Generate QR Codes for sharing your content. Completely free.
+    <div className="flex flex-col gap-y-5 py-5 relative bg-gray items-center min-h-screen px-3">
+      <h1 className="text-4xl md:text-5xl font-bold text-center">
+        QR Code Generator
+      </h1>
+      <h2 className="text-active text-2xl text-center">
+        Generate QR Codes for sharing content. Completely free.
       </h2>
-      <div className="flex flex-row items-center justify-center gap-x-4 w-full">
+      <div className="flex flex-row items-center justify-center overflow-hidden gap-x-3 py-2 px-3 w-full lg:w-1/2 rounded-md shadow border bg-white border-gray-100">
         <input
           type="text"
           placeholder="Enter a link, number or any text to generate the QR Code..."
-          className="text-sm w-1/2 p-4 rounded-md shadow-md border border-gray-100 placeholder:text-gray-300"
+          className="text-sm w-full h-9 px-2 rounded placeholder:text-gray-300"
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => {
@@ -53,18 +57,21 @@ export function QRGen() {
           }}
         />
 
-        <button
-          className="text-sm bg-gray-200 hover:bg-gray-300 transition-colors duration-300 px-4 py-2 rounded-full font-semibold"
-          onClick={() => {
-            setInput('')
-            setQr('')
-          }}
-        >
-          Clear
-        </button>
+        {input !== '' && (
+          <button
+            title="Clear"
+            className="text-sm hover:bg-gray-100 transition-colors duration-300 px-4 flex flex-row items-center justify-center  aspect-square w-9 h-9 rounded-md font-medium"
+            onClick={() => {
+              setInput('')
+              setQr('')
+            }}
+          >
+            <FontAwesomeIcon icon={faTimes} size="lg" />
+          </button>
+        )}
       </div>
       <button
-        className="py-2.5 px-5 bg-blue-500 hover:bg-blue-600 transition-colors duration-300 rounded-md text-white font-bold"
+        className="py-2.5 px-5 bg-blue-500 hover:bg-blue-600 transition-colors duration-300 rounded-md text-white font-semibold"
         onClick={() => {
           setQr(input)
         }}
@@ -82,7 +89,7 @@ export function QRGen() {
         <canvas
           ref={canvasRef}
           id="canvas"
-          className="shadow-md rounded"
+          className="border border-gray-200 rounded-md"
         ></canvas>
         <button
           onClick={handleDownload}
@@ -92,7 +99,7 @@ export function QRGen() {
         </button>
       </div>
 
-      <footer className="fixed left-0 right-0 bottom-0 w-full text-xs py-4 flex flex-row justify-center">
+      <footer className="fixed left-0 right-0 bottom-0 w-full text-xs py-3 flex flex-row justify-center bg-gray-700 text-white/80">
         {`Copyright (C) ${new Date().getFullYear()} Antony Holmes. All rights reserved.`}
       </footer>
     </div>
