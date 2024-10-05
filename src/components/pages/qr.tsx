@@ -11,15 +11,33 @@ export function QRGen() {
 
   useEffect(() => {
     if (qr) {
-      QRCode.toCanvas(canvasRef.current, input, { scale: 8 })
+      QRCode.toCanvas(canvasRef.current, input, { scale: 10 })
     }
   }, [qr])
 
+  const handleDownload = () => {
+    const canvas = canvasRef.current
+    if (canvas) {
+      // Convert the canvas to a data URL
+      const dataURL = canvas.toDataURL('image/png')
+
+      // Create a link element
+      const link = document.createElement('a')
+      link.href = dataURL
+      link.download = 'qr.png' // Set the desired file name
+
+      // Append to the body, click and remove it
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
+  }
+
   return (
-    <div className="flex flex-col gap-y-8 py-5 relative bg-gray font-mono items-center min-h-screen">
+    <div className="flex flex-col gap-y-5 py-5 relative bg-gray font-mono items-center min-h-screen">
       <h1 className="text-5xl font-bold">QR Code Generator</h1>
       <h2 className="text-active text-2xl">
-        Generate QR Codes for sharing your content for free.
+        Generate QR Codes for sharing your content. Completely free.
       </h2>
       <input
         type="text"
@@ -41,11 +59,25 @@ export function QRGen() {
         Generate QR Code
       </button>
 
-      <canvas
-        ref={canvasRef}
-        id="canvas"
-        className={cn('shadow-md rounded', [qr !== '', 'visible', 'invisible'])}
-      ></canvas>
+      <div
+        className={cn('flex flex-col items-center gap-y-3', [
+          qr !== '',
+          'visible',
+          'invisible',
+        ])}
+      >
+        <canvas
+          ref={canvasRef}
+          id="canvas"
+          className="shadow-md rounded"
+        ></canvas>
+        <button
+          onClick={handleDownload}
+          className="text-blue-400 hover:underline"
+        >
+          Download as PNG
+        </button>
+      </div>
 
       <footer className="fixed left-0 right-0 bottom-0 w-full text-xs py-4 flex flex-row justify-center">
         {`Copyright (C) ${new Date().getFullYear()} Antony Holmes. All rights reserved.`}

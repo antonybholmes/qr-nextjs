@@ -1,5 +1,5 @@
-import { SITE_NAME, SITE_URL } from "@consts"
-import { Metadata } from "next"
+import { SITE_NAME, SITE_URL } from '@consts'
+import { Metadata } from 'next'
 
 export function makeMetaData(title: string): Metadata {
   title = `${title} | ${SITE_NAME}`
