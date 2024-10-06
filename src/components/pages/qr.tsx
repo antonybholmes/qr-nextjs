@@ -36,18 +36,16 @@ export function QRGen() {
   }
 
   return (
-    <div className="flex flex-col gap-y-5 py-5 relative bg-gray items-center min-h-screen px-3">
+    <div className="flex flex-col gap-y-4 py-5 relative bg-gray items-center min-h-screen px-3">
       <h1 className="text-4xl md:text-5xl font-bold text-center">
         QR Code Generator
       </h1>
-      <h2 className="text-active text-2xl text-center">
-        Generate QR Codes for sharing content. Completely free.
-      </h2>
-      <div className="flex flex-row items-center justify-center overflow-hidden gap-x-3 py-2 px-3 w-full lg:w-1/2 rounded-md shadow border bg-white border-gray-100">
+    
+      <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-2 pl-3 px-2 w-full lg:w-1/2 rounded-md shadow border bg-white border-gray-100">
         <input
           type="text"
           placeholder="Enter a link, number or any text to generate the QR Code..."
-          className="text-sm w-full h-9 px-2 rounded placeholder:text-gray-300"
+          className="text-sm w-full h-8 px-1 rounded placeholder:text-gray-300"
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => {
@@ -60,7 +58,7 @@ export function QRGen() {
         {input !== '' && (
           <button
             title="Clear"
-            className="text-sm hover:bg-gray-100 transition-colors duration-300 px-4 flex flex-row items-center justify-center  aspect-square w-9 h-9 rounded-md font-medium"
+            className="text-sm hover:bg-gray-100 transition-colors duration-300 px-4 flex flex-row items-center justify-center aspect-square w-8 h-8 rounded font-medium"
             onClick={() => {
               setInput('')
               setQr('')
@@ -71,7 +69,7 @@ export function QRGen() {
         )}
       </div>
       <button
-        className="py-2.5 px-5 bg-blue-500 hover:bg-blue-600 transition-colors duration-300 rounded-md text-white font-semibold"
+        className="py-2.5 px-5 bg-blue-500 hover:bg-blue-600 text-sm transition-colors duration-300 rounded-md text-white font-semibold"
         onClick={() => {
           setQr(input)
         }}
@@ -80,22 +78,22 @@ export function QRGen() {
       </button>
 
       <div
-        className={cn('flex flex-col items-center gap-y-3', [
+        className={cn('flex flex-col items-center gap-y-4 mt-4', [
           qr !== '',
           'visible',
           'invisible',
         ])}
       >
-        <canvas
-          ref={canvasRef}
-          id="canvas"
-          className="border border-gray-200 rounded-md"
-        ></canvas>
+        <div className="flex flex-col items-center gap-y-2">
+          <canvas ref={canvasRef} id="canvas" className="border border-gray-200 rounded-md bg-white"/>
+          <span className="text-xs font-semibold text-center">{qr}</span>
+        </div>
+
         <button
           onClick={handleDownload}
-          className="text-blue-400 hover:underline"
+          className="text-sm font-semibold text-blue-500 hover:underline duration-300 transition-colors"
         >
-          Download as PNG
+          Download PNG
         </button>
       </div>
 

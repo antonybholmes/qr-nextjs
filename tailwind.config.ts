@@ -13,9 +13,9 @@ const config: Config = {
     },
 
     extend: {
-      colors: {
-        gray: colors.slate,
-      },
+      // colors: {
+      //   gray: colors.gray,
+      // },
     },
   },
   plugins: [],
