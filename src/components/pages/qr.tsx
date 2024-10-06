@@ -44,7 +44,7 @@ export function QRGen() {
       <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-2 pl-3 px-2 w-full lg:w-1/2 rounded-md shadow border bg-white border-gray-100">
         <input
           type="text"
-          placeholder="Enter a link, number or any text to generate the QR Code..."
+          placeholder={`Enter a link, number, or any text and click "Generate QR Code"...`}
           className="text-sm w-full h-8 px-1 rounded placeholder:text-gray-300"
           value={input}
           onChange={e => setInput(e.target.value)}
