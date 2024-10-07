@@ -43,7 +43,7 @@ export function QRGen() {
         </h1>
 
         <div className="flex flex-col w-full items-center gap-y-3">
-          <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-2 pl-3 px-2 w-full lg:w-1/2 rounded-md border bg-white border-gray-200">
+          <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-2 pl-3 px-2 w-full xl:w-1/2  2xl:w-5/12 rounded-md border bg-white border-gray-200">
             <input
               type="text"
               placeholder={`Enter a link or any text and click "Generate QR Code"...`}
