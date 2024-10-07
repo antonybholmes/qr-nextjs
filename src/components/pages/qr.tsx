@@ -105,8 +105,7 @@ export function QRGen() {
         </div>
       </div>
       <footer className="w-full text-xs py-3 flex flex-row justify-center border-t border-gray-200  text-gray-500">
-        Copyright &copy; {new Date().getFullYear()} Antony Holmes. All rights
-        reserved.
+        &copy; {new Date().getFullYear()} Antony Holmes. All rights reserved.
       </footer>
     </div>
   )
