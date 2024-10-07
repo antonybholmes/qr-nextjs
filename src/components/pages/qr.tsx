@@ -36,46 +36,48 @@ export function QRGen() {
   }
 
   return (
-    <div className="flex flex-col gap-y-4 py-5 relative bg-gray items-center min-h-screen px-3">
+    <div className="flex flex-col gap-y-5 py-6 relative bg-gray items-center min-h-screen px-3">
       <h1 className="text-4xl md:text-5xl font-bold text-center">
         QR Code Generator
       </h1>
-    
-      <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-2 pl-3 px-2 w-full lg:w-1/2 rounded-md shadow border bg-white border-gray-100">
-        <input
-          type="text"
-          placeholder={`Enter a link, number, or any text and click "Generate QR Code"...`}
-          className="text-sm w-full h-8 px-1 rounded placeholder:text-gray-300"
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              setQr(input)
-            }
-          }}
-        />
 
-        {input !== '' && (
-          <button
-            title="Clear"
-            className="text-sm hover:bg-gray-100 transition-colors duration-300 px-4 flex flex-row items-center justify-center aspect-square w-8 h-8 rounded font-medium"
-            onClick={() => {
-              setInput('')
-              setQr('')
+      <div className="flex flex-col w-full items-center gap-y-3">
+        <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-2 pl-3 px-2 w-full lg:w-1/2 rounded-md border bg-white border-gray-200">
+          <input
+            type="text"
+            placeholder={`Enter a link or any text and click "Generate QR Code"...`}
+            className="text-sm w-full h-8 px-1 rounded placeholder:text-gray-300"
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                setQr(input)
+              }
             }}
-          >
-            <FontAwesomeIcon icon={faTimes} size="lg" />
-          </button>
-        )}
+          />
+
+          {input !== '' && (
+            <button
+              title="Clear"
+              className="text-sm hover:bg-gray-100 transition-colors duration-300 px-4 flex flex-row items-center justify-center aspect-square w-8 h-8 rounded font-medium"
+              onClick={() => {
+                setInput('')
+                setQr('')
+              }}
+            >
+              <FontAwesomeIcon icon={faTimes} size="lg" />
+            </button>
+          )}
+        </div>
+        <button
+          className="h-10 px-4 bg-blue-500 hover:bg-blue-600 text-sm transition-colors duration-300 rounded-md text-white font-semibold"
+          onClick={() => {
+            setQr(input)
+          }}
+        >
+          Generate QR Code
+        </button>
       </div>
-      <button
-        className="py-2.5 px-5 bg-blue-500 hover:bg-blue-600 text-sm transition-colors duration-300 rounded-md text-white font-semibold"
-        onClick={() => {
-          setQr(input)
-        }}
-      >
-        Generate QR Code
-      </button>
 
       <div
         className={cn('flex flex-col items-center gap-y-4 mt-4', [
@@ -85,8 +87,12 @@ export function QRGen() {
         ])}
       >
         <div className="flex flex-col items-center gap-y-2">
-          <canvas ref={canvasRef} id="canvas" className="border border-gray-200 rounded-md bg-white"/>
           <span className="text-xs font-semibold text-center">{qr}</span>
+          <canvas
+            ref={canvasRef}
+            id="canvas"
+            className="border border-gray-200 transition-shadow duration-300 shadow hover:shadow-md rounded-lg bg-white"
+          />
         </div>
 
         <button
@@ -97,8 +103,9 @@ export function QRGen() {
         </button>
       </div>
 
-      <footer className="fixed left-0 right-0 bottom-0 w-full text-xs py-3 flex flex-row justify-center bg-gray-700 text-white/80">
-        {`Copyright (C) ${new Date().getFullYear()} Antony Holmes. All rights reserved.`}
+      <footer className="fixed left-0 right-0 bottom-0 w-full text-xs py-3 flex flex-row justify-center border-t border-gray-200 bg-gray-50 text-gray-500">
+        Copyright &copy; {new Date().getFullYear()} Antony Holmes. All rights
+        reserved.
       </footer>
     </div>
   )
