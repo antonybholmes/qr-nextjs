@@ -100,7 +100,7 @@ export function QRGen() {
             onClick={handleDownload}
             className="text-sm font-semibold text-blue-500 hover:underline duration-300 transition-colors"
           >
-            Download PNG
+            Download Image
           </button>
         </div>
       </div>
