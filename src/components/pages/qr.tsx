@@ -1,7 +1,6 @@
 'use client'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { cn } from '@lib/class-names'
+import { X } from 'lucide-react'
 import QRCode from 'qrcode'
 import { useEffect, useRef, useState } from 'react'
 
@@ -46,17 +45,17 @@ export function QRGen() {
 
   return (
     <div className="flex flex-col items-center min-h-screen">
-      <div className="flex flex-col gap-y-5 py-6 relative bg-gray items-center w-full grow px-3">
+      <div className="flex flex-col gap-y-8 py-6 relative bg-gray items-center w-full grow px-3">
         <h1 className="text-4xl md:text-5xl font-bold text-center">
           QR Code Generator
         </h1>
 
         <div className="flex flex-col w-full items-center gap-y-3">
-          <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-2 pl-3 px-2 w-full xl:w-1/2  2xl:w-5/12 rounded-md border bg-white border-gray-200">
+          <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-1 pl-2 pr-1 w-full xl:w-1/2 2xl:w-5/12 rounded-lg border bg-white border-gray-200">
             <input
               type="text"
               placeholder={`Enter a link or any text and click "Generate QR Code"...`}
-              className="text-sm w-full h-8 px-1 rounded placeholder:text-gray-300"
+              className="text-sm w-full h-8 px-1 placeholder:text-gray-300"
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => {
@@ -69,13 +68,13 @@ export function QRGen() {
             {input !== '' && (
               <button
                 title="Clear"
-                className="text-sm hover:bg-gray-100 transition-colors duration-300 px-4 flex flex-row items-center justify-center aspect-square w-8 h-8 rounded font-medium"
+                className="hover:bg-gray-100 transition-colors duration-300 px-4 flex flex-row items-center justify-center aspect-square w-8 h-8 rounded-full"
                 onClick={() => {
                   setInput('')
                   setQr('')
                 }}
               >
-                <FontAwesomeIcon icon={faTimes} size="lg" />
+                <X className="w-4 h-4 shrink-0" />
               </button>
             )}
           </div>
