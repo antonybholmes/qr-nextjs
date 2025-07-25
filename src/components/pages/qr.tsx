@@ -19,14 +19,23 @@ export function QRGen() {
 
   const handleDownload = () => {
     const canvas = canvasRef.current
+
     if (canvas) {
       // Convert the canvas to a data URL
       const dataURL = canvas.toDataURL('image/png')
 
+      // get first word of input as filename using regex
+      const filenameMatch = input
+        .replace(/^.+\/\//g, '')
+        .replace('www.', '')
+        .trim()
+        .match(/(\w+)/)
+      const filename = filenameMatch ? filenameMatch[0] : 'item'
+
       // Create a link element
       const link = document.createElement('a')
       link.href = dataURL
-      link.download = 'qr.png' // Set the desired file name
+      link.download = `${filename}_qr.png` // Set the desired file name
 
       // Append to the body, click and remove it
       document.body.appendChild(link)
