@@ -15,8 +15,7 @@
     "next": "15.4.4",
     "qrcode": "^1.5.4",
     "react": "^19",
-    "react-dom": "^19",
-    "tailwind": "4"
+    "react-dom": "^19"
   },
   "devDependencies": {
     "@types/node": "^24",
