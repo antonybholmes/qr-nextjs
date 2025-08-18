@@ -79,12 +79,12 @@ export function QRGen() {
             )}
           </div>
           <button
-            className="h-10 px-4 bg-blue-500 hover:bg-blue-600 text-sm transition-colors duration-300 rounded-md text-white font-semibold"
+            className="h-10 px-4 bg-blue-500 hover:bg-blue-600 text-sm transition-colors duration-300 rounded-full text-white font-semibold"
             onClick={() => {
               setQr(input)
             }}
           >
-            Generate QR Code
+            Make QR Code
           </button>
         </div>
 
