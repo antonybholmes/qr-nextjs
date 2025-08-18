@@ -55,7 +55,7 @@ export function QRGen() {
             <input
               type="text"
               placeholder={`Enter a link or any text and click "Generate QR Code"...`}
-              className="text-sm w-full h-8 px-1 placeholder:text-gray-300"
+              className="text-sm w-full h-8 px-1 placeholder:text-gray-400"
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => {
@@ -113,7 +113,13 @@ export function QRGen() {
         </div>
       </div>
       <footer className="w-full text-xs py-6 flex flex-row justify-center border-t border-gray-200 text-gray-500 mx-auto w-full md:w-2/3">
-        &copy; {new Date().getFullYear()} Antony Holmes. All rights reserved.
+        <span>
+          &copy; {new Date().getFullYear()}{' '}
+          <a href="https://antonyholmes.dev" className="hover:underline">
+            Antony Holmes
+          </a>
+          . All rights reserved.
+        </span>
       </footer>
     </div>
   )
