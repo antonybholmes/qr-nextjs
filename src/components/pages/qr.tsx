@@ -45,13 +45,13 @@ export function QRGen() {
 
   return (
     <div className="flex flex-col items-center min-h-screen">
-      <div className="flex flex-col gap-y-8 py-6 relative bg-gray items-center w-full grow px-3">
+      <div className="flex flex-col gap-y-8 py-6 relative bg-gray items-center grow px-3 w-full md:w-2/3">
         <h1 className="text-4xl md:text-5xl font-bold text-center">
           QR Code Generator
         </h1>
 
         <div className="flex flex-col w-full items-center gap-y-3">
-          <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-1 pl-2 pr-1 w-full xl:w-1/2 2xl:w-5/12 rounded-lg border bg-white border-gray-200">
+          <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-1 pl-2 pr-1.5 w-full xl:w-1/2 2xl:w-5/12 rounded-xl border bg-white border-gray-200">
             <input
               type="text"
               placeholder={`Enter a link or any text and click "Generate QR Code"...`}
@@ -100,7 +100,7 @@ export function QRGen() {
             <canvas
               ref={canvasRef}
               id="canvas"
-              className="border border-gray-200 transition-shadow duration-300 shadow hover:shadow-md rounded-lg bg-white"
+              className="border border-gray-200 transition-shadow duration-300 hover:shadow-lg rounded-lg bg-white"
             />
           </div>
 
@@ -112,7 +112,7 @@ export function QRGen() {
           </button>
         </div>
       </div>
-      <footer className="w-full text-xs py-3 flex flex-row justify-center border-t border-gray-200  text-gray-500">
+      <footer className="w-full text-xs py-6 flex flex-row justify-center border-t border-gray-200 text-gray-500 mx-auto w-full md:w-2/3">
         &copy; {new Date().getFullYear()} Antony Holmes. All rights reserved.
       </footer>
     </div>
