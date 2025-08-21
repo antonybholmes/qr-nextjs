@@ -7,15 +7,15 @@ import { useEffect, useRef, useState } from 'react'
 export function QRGen() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [input, setInput] = useState<string>('')
+  // QR code data derived from input when user presses Enter
   const [qr, setQr] = useState<string>('')
-  const [response, setResponse] = useState(null)
   const [scale, setScale] = useState(10)
 
   useEffect(() => {
-    if (qr) {
-      QRCode.toCanvas(canvasRef.current, input, { scale })
+    if (canvasRef.current && qr) {
+      QRCode.toCanvas(canvasRef.current, qr, { scale })
     }
-  }, [qr, scale])
+  }, [canvasRef.current, qr, scale])
 
   const handleDownload = () => {
     const canvas = canvasRef.current
@@ -51,8 +51,8 @@ export function QRGen() {
           QR Code Generator
         </h1>
 
-        <div className="flex flex-col w-full items-center gap-y-3">
-          <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-1 pl-2 pr-1.5 w-full xl:w-1/2 2xl:w-5/12 rounded-xl border bg-white border-gray-200">
+        <div className="flex flex-row w-full items-center gap-x-4 justify-center">
+          <div className="flex flex-row items-center justify-center overflow-hidden gap-x-2 py-1 pl-2 pr-1.5 w-full xl:w-1/2  rounded-xl border shadow-sm bg-white border-gray-200">
             <input
               type="text"
               placeholder={`Enter a link or any text and click "Generate QR Code"...`}
@@ -82,18 +82,18 @@ export function QRGen() {
           <div className="flex flex-row items-center gap-x-8">
             <button
               disabled={!input}
-              className="h-10 px-4  disabled:bg-gray-300 bg-blue-500 hover:bg-blue-600 text-sm transition-colors duration-300 rounded-full text-white font-semibold"
+              className="h-9 px-4 disabled:bg-gray-300 bg-blue-500 hover:bg-blue-600 text-sm transition-colors duration-300 rounded-full text-white font-semibold"
               onClick={() => {
                 setQr(input)
               }}
             >
-              Make QR Code
+              Generate
             </button>
           </div>
         </div>
 
         <div
-          className={cn('flex flex-col items-center gap-y-4 mt-4', [
+          className={cn('flex flex-col items-center gap-y-4', [
             qr !== '',
             'visible',
             'invisible',
@@ -106,16 +106,16 @@ export function QRGen() {
                 id="size-dropdown"
                 value={scale}
                 onChange={e => setScale(Number(e.target.value))}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-1 bg-white   focus:ring-indigo-400 focus:border-indigo-400"
+                className="block w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-1 bg-white   focus:ring-indigo-400 focus:border-indigo-400"
               >
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="30">30</option>
               </select>
             </div>
-            <span className="text-xs font-semibold text-center">
+            {/* <span className="text-xs font-semibold text-center">
               QR code for {qr}
-            </span>
+            </span> */}
             <canvas
               ref={canvasRef}
               id="canvas"
@@ -125,9 +125,9 @@ export function QRGen() {
 
           <button
             onClick={handleDownload}
-            className="text-sm font-semibold text-blue-500 hover:underline duration-300 transition-colors"
+            className="text-sm font-semibold text-blue-500 hover:underline duration-300 transition-colors text-wrap"
           >
-            Download Image
+            Download QR code for {qr}
           </button>
         </div>
       </div>
