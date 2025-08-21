@@ -9,12 +9,13 @@ export function QRGen() {
   const [input, setInput] = useState<string>('')
   const [qr, setQr] = useState<string>('')
   const [response, setResponse] = useState(null)
+  const [scale, setScale] = useState(10)
 
   useEffect(() => {
     if (qr) {
-      QRCode.toCanvas(canvasRef.current, input, { scale: 10 })
+      QRCode.toCanvas(canvasRef.current, input, { scale })
     }
-  }, [qr])
+  }, [qr, scale])
 
   const handleDownload = () => {
     const canvas = canvasRef.current
@@ -68,7 +69,7 @@ export function QRGen() {
             {input !== '' && (
               <button
                 title="Clear"
-                className="hover:bg-gray-100 transition-colors duration-300 px-4 flex flex-row items-center justify-center aspect-square w-8 h-8 rounded-full"
+                className="hover:bg-gray-200 transition-colors duration-300 flex flex-row items-center justify-center aspect-square w-6 h-6 rounded-full"
                 onClick={() => {
                   setInput('')
                   setQr('')
@@ -78,14 +79,17 @@ export function QRGen() {
               </button>
             )}
           </div>
-          <button
-            className="h-10 px-4 bg-blue-500 hover:bg-blue-600 text-sm transition-colors duration-300 rounded-full text-white font-semibold"
-            onClick={() => {
-              setQr(input)
-            }}
-          >
-            Make QR Code
-          </button>
+          <div className="flex flex-row items-center gap-x-8">
+            <button
+              disabled={!input}
+              className="h-10 px-4  disabled:bg-gray-300 bg-blue-500 hover:bg-blue-600 text-sm transition-colors duration-300 rounded-full text-white font-semibold"
+              onClick={() => {
+                setQr(input)
+              }}
+            >
+              Make QR Code
+            </button>
+          </div>
         </div>
 
         <div
@@ -95,12 +99,27 @@ export function QRGen() {
             'invisible',
           ])}
         >
-          <div className="flex flex-col items-center gap-y-2">
-            <span className="text-xs font-semibold text-center">{qr}</span>
+          <div className="flex flex-col items-center gap-y-4">
+            <div className="flex flex-row gap-x-2 items-center">
+              <label htmlFor="size-dropdown">Size</label>
+              <select
+                id="size-dropdown"
+                value={scale}
+                onChange={e => setScale(Number(e.target.value))}
+                className="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-1 bg-white   focus:ring-indigo-400 focus:border-indigo-400"
+              >
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+            <span className="text-xs font-semibold text-center">
+              QR code for {qr}
+            </span>
             <canvas
               ref={canvasRef}
               id="canvas"
-              className="border border-gray-200 transition-shadow duration-300 hover:shadow-lg rounded-lg bg-white"
+              className="border border-gray-200 transition-color duration-300 hover:border-gray-300 rounded-lg bg-white"
             />
           </div>
 
